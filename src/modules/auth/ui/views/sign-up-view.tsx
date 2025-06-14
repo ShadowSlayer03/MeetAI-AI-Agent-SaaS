@@ -34,7 +34,7 @@ const SignUpView = () => {
       name: "",
       email: "",
       password: "",
-      confirmPassword: ""
+      confirmPassword: "",
     },
   });
 
@@ -42,23 +42,29 @@ const SignUpView = () => {
     setError(null);
     setPending(true);
 
-    await authClient.signUp.email(
-      {
-        name: data.name,
-        email: data.email,
-        password: data.password,
-      },
-      {
-        onSuccess: () => {
-          setPending(false);
-          router.push("/");
+    try {
+      await authClient.signUp.email(
+        {
+          name: data.name,
+          email: data.email,
+          password: data.password,
         },
-        onError: ({ error }) => {
-          console.log(error);
-          setError(error.message);
-        },
-      }
-    );
+        {
+          onSuccess: () => {
+            setPending(false);
+            router.push("/");
+          },
+          onError: ({ error }) => {
+            console.log(error);
+            setError(error.message);
+            setPending(false);
+          },
+        }
+      );
+    } catch (error) {
+      setError((error as Error).message);
+      +setPending(false);
+    }
   };
 
   return (
