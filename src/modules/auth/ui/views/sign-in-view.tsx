@@ -22,6 +22,10 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import onSocial from "@/lib/social-login";
+import GoogleLogo from "../logos/google-logo";
+import GitHubLogo from "../logos/github-logo";
+import Image from "next/image";
 
 const SignInView = () => {
   const router = useRouter();
@@ -134,17 +138,21 @@ const SignInView = () => {
                     disabled={pending}
                     variant="outline"
                     type="button"
-                    className="w-full"
+                    className="w-full gap-2"
+                    onClick={() => onSocial("google", setPending, setError)}
                   >
+                    <GoogleLogo />
                     Google
                   </Button>
                   <Button
                     disabled={pending}
                     variant="outline"
                     type="button"
-                    className="w-full"
+                    className="w-full gap-2"
+                    onClick={() => onSocial("github", setPending, setError)}
                   >
-                    Github
+                    <GitHubLogo />
+                    GitHub
                   </Button>
                 </div>
                 <div className="text-center text-sm">
@@ -160,10 +168,11 @@ const SignInView = () => {
             </form>
           </Form>
           <div className="bg-radial from-green-500 to-green-800 relative hidden md:flex flex-col gap-y-4 items-center justify-center">
-            <img
+            <Image
               src="/logo-white.svg"
-              alt="Miva AI Logo"
-              className="h-[92px] w-[92px]"
+              alt="Miva AI Logo - AI Meeting Assistant"
+              width={92}
+              height={92}
             />
             <p className="text-2xl font-semibold text-white">Miva AI</p>
           </div>
