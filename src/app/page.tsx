@@ -1,10 +1,16 @@
-"use client";
+import { auth } from "@/lib/auth";
+import HomeView from "@/modules/home/ui/views/home-view";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
+const Page = async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
-export default function Home() {
-  return (
-    <Button variant="destructive">Hello there!</Button>
-  );
-}
+  if (!session) redirect("/sign-in");
+
+  return <HomeView />;
+};
+
+export default Page;
