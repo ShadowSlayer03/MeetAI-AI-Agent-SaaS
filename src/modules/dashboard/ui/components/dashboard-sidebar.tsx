@@ -35,7 +35,7 @@ const DashboardSidebar = (props: Props) => {
             width={36}
             height={36}
           />
-          <p className="text-2xl font-semibold">Miva AI</p>
+          <p className="font-heading text-2xl font-semibold">Miva AI</p>
         </Link>
       </SidebarHeader>
       <div className="px-4 py-2">
@@ -59,7 +59,7 @@ const DashboardSidebar = (props: Props) => {
                     >
                       <Link href={item.href}>
                         <item.icon />
-                        <span className="text-sm font-medium tracking-tight">
+                        <span className="text-md font-medium tracking-tight">
                           {item.label}
                         </span>
                       </Link>
@@ -92,7 +92,7 @@ const DashboardSidebar = (props: Props) => {
                     >
                       <Link href={item.href}>
                         <item.icon />
-                        <span className="text-sm font-medium tracking-tight">
+                        <span className="text-md font-medium tracking-tight">
                           {item.label}
                         </span>
                       </Link>

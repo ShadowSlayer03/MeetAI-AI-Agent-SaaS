@@ -1,16 +1,21 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Lato, Nunito } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const nunito = Nunito({ 
   subsets: ["latin"],
+  variable: "--font-body",
+  display: 'swap',
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// Heading font - Sans
+const lato = Lato({
+  weight: ['400', '700'],
   subsets: ["latin"],
+  variable: "--font-heading",
+  display: 'swap',
 });
+
 
 export const metadata: Metadata = {
   title: "Miva AI | Your AI Meeting Assistant",
@@ -51,7 +56,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/logo.svg" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-gray-900`}>
+      <body className={`${nunito.variable} ${lato.variable} antialiased bg-white text-gray-900`}>
         {children}
       </body>
     </html>

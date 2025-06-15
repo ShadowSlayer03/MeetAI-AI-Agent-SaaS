@@ -81,6 +81,10 @@
   --sidebar-accent-foreground: oklch(1 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* Custom Fonts */
+  --font-body: 'Nunito', sans-serif;
+  --font-heading: 'Lato', sans-serif;
 }
 
 .dark {
@@ -124,4 +128,12 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+.font-heading {
+  font-family: var(--font-heading);
 }
