@@ -1,3 +1,5 @@
+"use client";
+
 import { CommandDialog, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import React, { Dispatch, SetStateAction } from "react";
 

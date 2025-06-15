@@ -72,7 +72,7 @@ const DashboardUserButton = (props: Props) => {
             <DrawerDescription>{data.user.email}</DrawerDescription>
           </DrawerHeader>
           <DrawerFooter>
-            <Button variant="outline" onClick={()=>{}}>
+            <Button variant="outline" onClick={()=>router.push("/billing")}>
               <CreditCardIcon className="size-4 text-black" />
               Billing
             </Button>
@@ -121,7 +121,7 @@ const DashboardUserButton = (props: Props) => {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator className="bg-border" />
-        <DropdownMenuItem className="px-4 py-2 cursor-pointer flex items-center justify-between hover:bg-accent">
+        <DropdownMenuItem className="px-4 py-2 cursor-pointer flex items-center justify-between hover:bg-accent" onClick={()=>router.push("/billing")}>
           Billing
           <CreditCardIcon className="size-4" />
         </DropdownMenuItem>

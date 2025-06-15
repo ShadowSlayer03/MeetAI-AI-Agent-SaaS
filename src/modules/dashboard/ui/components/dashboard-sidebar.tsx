@@ -59,7 +59,7 @@ const DashboardSidebar = (props: Props) => {
                     >
                       <Link href={item.href}>
                         <item.icon />
-                        <span className="text-md font-medium tracking-tight">
+                        <span className="text-base font-medium tracking-tight">
                           {item.label}
                         </span>
                       </Link>
@@ -92,7 +92,7 @@ const DashboardSidebar = (props: Props) => {
                     >
                       <Link href={item.href}>
                         <item.icon />
-                        <span className="text-md font-medium tracking-tight">
+                        <span className="text-base font-medium tracking-tight">
                           {item.label}
                         </span>
                       </Link>
