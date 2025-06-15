@@ -17,7 +17,7 @@ import {
 
 type ResponsiveDialogProps = {
   title: string;
-  description: string;
+  description?: string;
   children: React.ReactNode;
   open: boolean;
   onOpenChange: (open: boolean) => void;
