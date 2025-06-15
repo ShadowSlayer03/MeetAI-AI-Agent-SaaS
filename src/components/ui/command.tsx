@@ -82,7 +82,7 @@ function ResponsiveCommandDialog({
   if (isMobile) {
     return (
       <Drawer {...props}>
-        <DrawerContent className="oveflow-hidden p-0">
+        <DrawerContent className="overflow-hidden p-0">
           <DrawerHeader className="sr-only">
             <DrawerTitle>{title}</DrawerTitle>
             <DrawerDescription>{description}</DrawerDescription>
