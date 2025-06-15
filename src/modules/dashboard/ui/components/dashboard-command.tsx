@@ -1,6 +1,6 @@
 "use client";
 
-import { CommandDialog, CommandInput, CommandItem, CommandList, ResponsiveCommandDialog } from "@/components/ui/command";
+import { CommandInput, CommandItem, CommandList, ResponsiveCommandDialog } from "@/components/ui/command";
 import React, { Dispatch, SetStateAction } from "react";
 
 type Props = {
