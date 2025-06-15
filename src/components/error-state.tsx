@@ -1,6 +1,5 @@
-import { AlertCircleIcon, Loader2Icon } from "lucide-react";
+import { AlertCircleIcon } from "lucide-react";
 import React from "react";
-
 type ErrorStateProps = {
   title: string;
   description: string;
