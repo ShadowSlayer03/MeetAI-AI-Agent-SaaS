@@ -72,10 +72,17 @@ const AgentForm = ({ onSuccess, onCancel, initialValues }: AgentFormProps) => {
   const isPending = createAgent.isPending || updateAgent.isPending;
 
   const onSubmit = (values: z.infer<typeof agentsInsertSchema>) => {
-    if (isEdit){
-      updateAgent.mutate({...values, id: initialValues.id})
+    const trimmedValues = {
+      ...values,
+      name: values.name.trim(),
+      instructions: values.instructions.trim()
+    };
+
+    if (isEdit) {
+      updateAgent.mutate({ ...trimmedValues, id: initialValues.id });
+    } else {
+      createAgent.mutate(trimmedValues);
     }
-    else createAgent.mutate(values);
   };
 
   return (
