@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Lato, Nunito } from "next/font/google";
 import "./globals.css";
 import { TRPCReactProvider } from "@/trpc/client";
+import { Toaster } from "@/components/ui/sonner";
+import { NuqsAdapter } from "nuqs/adapters/next";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -61,7 +63,12 @@ export default function RootLayout({
       <body
         className={`${nunito.variable} ${lato.variable} antialiased bg-white text-gray-900`}
       >
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <NuqsAdapter>
+          <TRPCReactProvider>
+            <Toaster />
+            {children}
+          </TRPCReactProvider>
+        </NuqsAdapter>
       </body>
     </html>
   );
