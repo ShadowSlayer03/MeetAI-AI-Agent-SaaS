@@ -34,7 +34,12 @@ export const useConfirm = (
     return (
       <ResponsiveDialog
         open={promise !== null}
-        onOpenChange={handleClose}
+        onOpenChange={(open) => {
+          if (!open && promise) {
+            promise.resolve(false);
+          }
+          handleClose();
+        }}
         title={title}
         description={description}
       >
