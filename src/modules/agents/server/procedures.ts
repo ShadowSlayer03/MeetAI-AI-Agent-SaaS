@@ -84,8 +84,7 @@ export const agentsRouter = createTRPCRouter({
       const { search, page, pageSize } = input;
 
       const whereClause = [
--        eq(agents.userId, ctx.auth.session.userId),
-+        eq(agents.userId, ctx.auth.user.id),
+        eq(agents.userId, ctx.auth.user.id),
         search ? ilike(agents.name, `%${search}%`) : undefined,
       ].filter(Boolean);
 

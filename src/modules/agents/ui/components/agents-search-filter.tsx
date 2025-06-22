@@ -3,12 +3,8 @@ import { useAgentsFilters } from "../../hooks/use-agents-filters";
 import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";
 
-type Props = {};
-
-const AgentsSearchFilter = (props: Props) => {
+const AgentsSearchFilter = () => {
   const [filters, setFilters] = useAgentsFilters();
-
-  
 
   return (
     <div className="relative">
