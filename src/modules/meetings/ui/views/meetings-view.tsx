@@ -41,7 +41,7 @@ const MeetingsView = (props: Props) => {
         totalPages={data?.totalPages || 1}
         onPageChange={(page) => setFilters({ page })}
       />
-      {data.items.length === 0 && !filters.search && !filters.status && !filters.agentId && (
+      {data?.items?.length === 0 && !filters.search && !filters.status && !filters.agentId && (
         <EmptyState
           title="Create your first meeting"
           description="Schedule a meeting to connect with others. Each meeting lets you collaborate, share ideas, and interact with participants in real time."
