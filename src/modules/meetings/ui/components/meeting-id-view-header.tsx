@@ -35,7 +35,7 @@ const MeetingIdViewHeader = ({ meetingId, meetingName, onEdit, onRemove }: Props
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink asChild className="font-medium font-heading text-xl">
-              <Link href="/agents">My Meetings</Link>
+              <Link href="/meetings">My Meetings</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
 
