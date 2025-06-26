@@ -72,7 +72,7 @@ export const meetingsRouter = createTRPCRouter({
       const [existingMeeting] = await db
         .select({
           ...getTableColumns(meetings),
-          meetingCount: sql<number>`5`,
+          meetingCount: sql<number>`(SELECT COUNT(*) FROM meetings WHERE agent_id = ${meetings.agentId})`,
         })
         .from(meetings)
         .where(
@@ -112,7 +112,7 @@ export const meetingsRouter = createTRPCRouter({
         search ? ilike(meetings.name, `%${search}%`) : undefined,
         status ? eq(meetings.status, status) : undefined,
         agentId ? eq(meetings.agentId, agentId) : undefined,
-      ]
+      ].filter(Boolean)
 
       const data = await db
         .select({
