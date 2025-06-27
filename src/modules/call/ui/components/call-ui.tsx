@@ -23,8 +23,14 @@ const CallUI = ({ meetingName }: Props) => {
   const handleLeave = () => {
     if (!call) return;
 
-    call.endCall();
-    setShow("ended");
+    try {
+      call.endCall();
+      setShow("ended");
+    } catch (error) {
+      console.error("Failed to end call:", error);
+      // Still show ended state as fallback
+      setShow("ended");
+    }
   };
 
   return (
