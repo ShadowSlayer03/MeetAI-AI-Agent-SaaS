@@ -15,9 +15,13 @@ const CallUI = ({ meetingName }: Props) => {
   const handleJoin = async () => {
     if (!call) return;
 
-    await call.join();
-
-    setShow("call");
+    try {
+      await call.join();
+      setShow("call");
+    } catch (error) {
+      console.error("Failed to join call:", error);
+      // Consider showing an error state or toast notification
+    }
   };
 
   const handleLeave = () => {
