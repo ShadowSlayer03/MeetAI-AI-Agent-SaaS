@@ -18,10 +18,12 @@ const CallView = ({ meetingId }: Props) => {
     trpc.meetings.getOne.queryOptions({ id: meetingId })
   ) as MeetingsGetOne;
 
-  if(data.status==="completed"){
-    <div className="flex h-screen items-center">
+  if (data.status === "completed") {
+    return (
+      <div className="flex h-screen items-center">
         <ErrorState title="Meeting has ended" description="You can no longer join the meeting" />
-    </div>
+      </div>
+    );
   }
 
   return <CallProvider meetingId={meetingId} meetingName={data.name} />;
