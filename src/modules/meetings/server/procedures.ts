@@ -19,19 +19,20 @@ export const meetingsRouter = createTRPCRouter({
   generateToken: protectedProcedure.mutation(async ({ ctx }) => {
     await streamVideo.upsertUsers([
       {
-        id:
+        id: ctx.auth.user.id,
+        name: ctx.auth.user.name,
+        image:
           ctx.auth.user.image ??
           generateAvatarURI({ seed: ctx.auth.user.name, variant: "initials" }),
       },
     ]);
 
     const expirationTime = Math.floor(Date.now() / 1000) + 3600;
-    const issuedAt = Math.floor(Date.now() / 1000) - 60;
 
     const token = streamVideo.generateUserToken({
       user_id: ctx.auth.user.id,
       exp: expirationTime,
-      validity_in_seconds: issuedAt,
+      validity_in_seconds: 3600, // 1 hour validity
     });
 
     return token;
