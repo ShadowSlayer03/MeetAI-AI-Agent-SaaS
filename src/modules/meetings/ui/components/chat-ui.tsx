@@ -49,8 +49,11 @@ const ChatUI = ({
     })
 
     setChannel(channel);
-  }, [client, meetingId, meetingName, userId])
 
+    return () => {
+      channel.unwatch();
+    };
+  }, [client, meetingId, userId])
   if (!client) {
     return <LoadingState title="Loading Chat" description="This may take a few seconds" />
   }
