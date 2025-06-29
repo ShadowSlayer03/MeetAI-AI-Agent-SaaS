@@ -91,7 +91,7 @@ const AgentIdView = ({ agentId }: Props) => {
             >
               <VideoIcon className="text-blue-700" />
               {data.meetingCount}{" "}
-              {data.meetingCount === 1 ? "meeting" : "meetings"}
+              {Number(data.meetingCount) === 1 ? "meeting" : "meetings"}
             </Badge>
             <div className="flex flex-col gap-y-4">
               <p className="text-lg font-medium">Instructions</p>

@@ -15,6 +15,10 @@ export function formatDuration(seconds: number) {
 }
 
 export function getInstructions(existingMeeting:any, existingAgent:any){
+  if (!existingMeeting?.summary || !existingAgent?.instructions) {
+    throw new Error('Meeting summary and agent instructions are required');
+  }
+
   return `
       You are an AI assistant helping the user revisit a recently completed meeting.
       Below is a summary of the meeting, generated from the transcript:

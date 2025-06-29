@@ -89,7 +89,6 @@ export const meetingsRouter = createTRPCRouter({
           agents.map((agent) => ({
             ...agent,
             image:
-              user.image ??
               generateAvatarURI({ seed: agent.name, variant: "botttsNeutral" }),
           }))
         );
@@ -303,7 +302,7 @@ export const meetingsRouter = createTRPCRouter({
           duration: sql<number>`EXTRACT(EPOCH FROM (ended_at - started_at))`.as(
             "duration"
           ),
-          meetingCount: sql<number>`5`,
+          meetingCount: sql`(SELECT COUNT(*) FROM meetings WHERE agent_id = ${meetings.agentId})`.as("meetingCount"),
         })
         .from(meetings)
         .innerJoin(agents, eq(meetings.agentId, agents.id))

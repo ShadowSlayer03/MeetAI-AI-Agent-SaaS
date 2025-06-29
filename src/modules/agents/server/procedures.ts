@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { agents } from "@/db/schema";
+import { agents, meetings } from "@/db/schema";
 import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
 import { agentsInsertSchema, agentsUpdateSchema } from "../schemas";
 import { z } from "zod";
@@ -56,12 +56,14 @@ export const agentsRouter = createTRPCRouter({
       const [existingAgent] = await db
         .select({
           ...getTableColumns(agents),
-          meetingCount: sql<number>`5`,
+          meetingCount: sql<number>`COUNT(meetings.id)`.as("meetingCount"),
         })
         .from(agents)
+        .leftJoin(meetings, eq(meetings.agentId, agents.id))
         .where(
           and(eq(agents.id, input.id), eq(agents.userId, ctx.auth.user.id))
-        );
+        )
+        .groupBy(agents.id); // 👈 Required when using aggregation
 
       if (!existingAgent)
         throw new TRPCError({ code: "NOT_FOUND", message: "Agent Not Found!" });
@@ -91,13 +93,17 @@ export const agentsRouter = createTRPCRouter({
       const data = await db
         .select({
           ...getTableColumns(agents),
-          meetingCount: sql<number>`5`,
+          meetingCount: sql<number>`COUNT(meetings.id)`.as("meetingCount"),
         })
         .from(agents)
+        .leftJoin(meetings, eq(meetings.agentId, agents.id))
         .where(and(...whereClause))
+        .groupBy(agents.id)
         .orderBy(desc(agents.createdAt), desc(agents.id))
         .limit(pageSize)
         .offset((page - 1) * pageSize);
+
+      console.log("Dataaaa:", data);
 
       const [total] = await db
         .select({ count: count() })

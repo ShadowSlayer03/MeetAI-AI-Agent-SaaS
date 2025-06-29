@@ -7,10 +7,15 @@ import { eq, inArray } from "drizzle-orm";
 import { createAgent, openai, TextMessage } from "@inngest/agent-kit";
 import { SYSTEM_PROMPT } from "@/constants";
 
+const apiKey = process.env.OPENAI_API_KEY;
+if (!apiKey) {
+  throw new Error("OPENAI_API_KEY environment variable is not set");
+}
+
 const summarizer = createAgent({
   name: "summarizer",
   system: SYSTEM_PROMPT.trim(),
-  model: openai({ model: "gpt-4o", apiKey: process.env.OPENAI_API_KEY }),
+  model: openai({ model: "gpt-4o", apiKey }),
 });
 
 export const meetingsProcessing = inngest.createFunction(
@@ -77,7 +82,7 @@ export const meetingsProcessing = inngest.createFunction(
 
     const { output } = await summarizer.run(
       "Summarize the following transcript:" +
-        JSON.stringify(transcriptWithSpeakers)
+      JSON.stringify(transcriptWithSpeakers)
     );
 
     await step.run("save-summary", async () => {

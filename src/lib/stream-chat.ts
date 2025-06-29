@@ -1,4 +1,4 @@
-import "Server-only";
+import "server-only";
 
 import {StreamChat} from "stream-chat";
 

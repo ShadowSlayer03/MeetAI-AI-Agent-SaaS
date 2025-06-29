@@ -70,11 +70,11 @@ const CompletedState = ({ data }: Props) => {
         </TabsContent>
         <TabsContent value="recording">
           <div className="bg-white rounded-lg border px-4 py-5">
-            <video
+            {data.recordingUrl ? (<video
               src={data.recordingUrl!}
               className="w-full rounded-lg"
               controls
-            />
+            />) : (<p className="text-muted-foreground text-center py-8">No recording available</p>)}
           </div>
         </TabsContent>
         <TabsContent value="summary">
