@@ -1,9 +1,10 @@
+import LoadingState from "@/components/loading-state";
 import { useTRPC } from "@/trpc/client";
-import { StreamChannel } from "@stream-io/node-sdk";
+import { Channel as StreamChannel } from "stream-chat";
 import { useMutation } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { useCreateChatClient } from "stream-chat-react";
+import { Channel, Chat, MessageInput, MessageList, Thread, useCreateChatClient, Window } from "stream-chat-react";
 
 import "stream-chat-react/dist/css/v2/index.css";
 
@@ -12,7 +13,7 @@ type Props = {
   meetingName: string;
   userId: string;
   userName: string;
-  userImage: string | undefined;
+  userImage: string | null | undefined;
 };
 
 const ChatUI = ({
@@ -36,11 +37,37 @@ const ChatUI = ({
     userData: {
       id: userId,
       name: userName,
-      image: userImage,
+      image: userImage as string,
     },
   });
 
-  return <div>ChatUI</div>;
+  useEffect(() => {
+    if (!client) return;
+
+    const channel = client.channel("messaging", meetingId, {
+      members: [userId]
+    })
+
+    setChannel(channel);
+  }, [client, meetingId, meetingName, userId])
+
+  if (!client) {
+    return <LoadingState title="Loading Chat" description="This may take a few seconds" />
+  }
+
+  return <div className="bg-white rounded-lg border overflow-hidden">
+    <Chat client={client}>
+      <Channel channel={channel}>
+        <Window>
+          <div className="flex-1 overflow-y-auto max-h-[calc(100vh-23rem)] border-b">
+            <MessageList />
+          </div>
+          <MessageInput />
+        </Window>
+        <Thread />
+      </Channel>
+    </Chat>
+  </div>;
 };
 
 export default ChatUI;

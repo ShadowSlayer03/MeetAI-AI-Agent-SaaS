@@ -247,26 +247,27 @@ export const meetingsRouter = createTRPCRouter({
       return createdMeeting;
     }),
   getOne: protectedProcedure
-    .input(z.object({ id: z.string() }))
-    .query(async ({ input, ctx }) => {
-      const [existingMeeting] = await db
-        .select({
-          ...getTableColumns(meetings),
-          meetingCount: sql<number>`(SELECT COUNT(*) FROM meetings WHERE agent_id = ${meetings.agentId})`,
-        })
-        .from(meetings)
-        .where(
-          and(eq(meetings.id, input.id), eq(meetings.userId, ctx.auth.user.id))
-        );
+  .input(z.object({ id: z.string() }))
+  .query(async ({ input, ctx }) => {
+    const [existingMeeting] = await db
+      .select({
+        ...getTableColumns(meetings),
+        agent: agents,
+        duration: sql<number>`EXTRACT(EPOCH FROM (ended_at - started_at))`.as("duration"),
+        meetingCount: sql<number>`(SELECT COUNT(*) FROM meetings WHERE agent_id = ${meetings.agentId})`,
+      })
+      .from(meetings)
+      .innerJoin(agents, eq(meetings.agentId, agents.id))
+      .where(and(eq(meetings.id, input.id), eq(meetings.userId, ctx.auth.user.id)));
 
-      if (!existingMeeting)
-        throw new TRPCError({
-          code: "NOT_FOUND",
-          message: "Meeting Not Found!",
-        });
+    if (!existingMeeting)
+      throw new TRPCError({
+        code: "NOT_FOUND",
+        message: "Meeting Not Found!",
+      });
 
-      return existingMeeting;
-    }),
+    return existingMeeting;
+  }),
   getMany: protectedProcedure
     .input(
       z.object({

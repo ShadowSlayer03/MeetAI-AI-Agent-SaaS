@@ -1,6 +1,6 @@
 import EmptyState from "@/components/empty-state";
 import React from "react";
-import { MeetingsGetOne } from "../../types";
+import { MeetingsGetMany, MeetingsGetManyResponse, MeetingsGetOne } from "../../types";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -17,9 +17,10 @@ import Markdown from "react-markdown";
 import { Badge } from "@/components/ui/badge";
 import { formatDuration } from "@/lib/utils";
 import Transcript from "./transcript";
+import ChatProvider from "./chat-provider";
 
 type Props = {
-  data: MeetingsGetOne;
+  data: MeetingsGetMany;
 };
 
 const CompletedState = ({ data }: Props) => {
@@ -61,6 +62,9 @@ const CompletedState = ({ data }: Props) => {
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
         </div>
+        <TabsContent value="chat">
+          <ChatProvider meetingId={data.id} meetingName={data.name} />
+        </TabsContent>
         <TabsContent value="transcript">
           <Transcript meetingId={data.id} />
         </TabsContent>
@@ -78,17 +82,22 @@ const CompletedState = ({ data }: Props) => {
             <div className="px-4 py-5 gap-y-5 flex flex-col col-span-5">
               <h2 className="text-2xl font-medium capitalize">{data.name}</h2>
               <div className="flex gap-x-2 items-center">
-                <Link
-                  href={`/agents/${data.agent.id}`}
-                  className="flex items-center gap-x-2 underline underline-offset-4 capitalize"
-                >
-                  <GeneratedAvatar
-                    variant="botttsNeutral"
-                    seed={data.agent.name}
-                    className="size-5"
-                  />
-                  {data.agent.name}
-                </Link>{" "}
+                {data.agent ? (
+                  <Link
+                    href={`/agents/${data.agent.id}`}
+                    className="flex items-center gap-x-2 underline underline-offset-4 capitalize"
+                  >
+                    <GeneratedAvatar
+                      variant="botttsNeutral"
+                      seed={data.agent.name}
+                      className="size-5"
+                    />
+                    {data.agent.name}
+                  </Link>
+                ) : (
+                  <span className="italic text-muted-foreground">Agent not found</span>
+                )}
+
                 <p>{data.startedAt ? format(data.startedAt, "PPP") : ""}</p>
               </div>
               <div className="flex gap-x-2 items-center">
