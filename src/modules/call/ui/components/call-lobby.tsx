@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 
 import "@stream-io/video-react-sdk/dist/css/styles.css";
 import {
@@ -55,6 +57,14 @@ const CallLobby = ({ onJoin }: Props) => {
 
   const hasBrowserMediaPermission = hasMicPermission && hasCameraPermission;
 
+  const [loading,setLoading] = useState(false);
+
+  const handleClickOnJoin = async()=>{
+    setLoading(true);
+    await onJoin();
+    setLoading(false);
+  }
+
   return (
     <div className="flex flex-col items-center justify-center h-full bg-radial from-sidebar-accent to-sidebar">
       <div className="py-4 px-8 flex-1 items-center justify-center">
@@ -78,9 +88,9 @@ const CallLobby = ({ onJoin }: Props) => {
             <Button asChild variant="ghost">
               <Link href="/meetings">Cancel</Link>
             </Button>
-            <Button onClick={onJoin}>
+            <Button disabled={loading} onClick={handleClickOnJoin}>
               <LogInIcon />
-              Join Call
+              {loading? "Joining..." : "Join Call"}
             </Button>
           </div>
         </div>

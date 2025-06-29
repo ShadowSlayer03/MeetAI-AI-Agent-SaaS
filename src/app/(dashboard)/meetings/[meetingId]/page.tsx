@@ -26,7 +26,7 @@ const Page = async ({ params }: Props) => {
   if (!session) redirect("/sign-in");
 
   const queryClient = getQueryClient();
-  void queryClient.prefetchQuery(
+  await queryClient.prefetchQuery(
     trpc.meetings.getOne.queryOptions({ id: meetingId })
   );
 

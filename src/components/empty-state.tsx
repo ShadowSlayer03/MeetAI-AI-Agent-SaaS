@@ -1,4 +1,5 @@
-import { AlertCircleIcon } from "lucide-react";
+"use client";
+
 import Image from "next/image";
 import React from "react";
 type EmptyStateProps = {
@@ -7,10 +8,10 @@ type EmptyStateProps = {
   image?: string;
 };
 
-const EmptyState = ({ title, description, image="/empty.svg" }: EmptyStateProps) => {
+const EmptyState = ({ title, description, image = "/empty.svg" }: EmptyStateProps) => {
   return (
     <div className="flex flex-col items-center justify-center gap-y-6 bg-background rounded-lg p-10 shadow-sm">
-      <Image src={image} width={240} height={240} alt="No Agents SVG" />
+      <Image src={image ?? "/empty.svg"} width={240} height={240} alt="No Agents SVG" />
       <div className="flex flex-col gap-y-6 max-w-md mx-auto text-center">
         <h6 className="text-lg font-medium">{title}</h6>
         <p className="text-sm text-muted-foreground">{description}</p>
