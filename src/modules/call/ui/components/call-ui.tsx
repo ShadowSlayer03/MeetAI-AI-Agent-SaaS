@@ -1,3 +1,5 @@
+"use client";
+
 import { StreamTheme, useCall } from "@stream-io/video-react-sdk";
 import React, { useState } from "react";
 import CallLobby from "./call-lobby";
