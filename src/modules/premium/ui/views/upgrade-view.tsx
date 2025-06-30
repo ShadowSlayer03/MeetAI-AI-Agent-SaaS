@@ -8,9 +8,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import React from 'react'
 import PricingCard from '../components/pricing-card';
 
-type Props = {}
-
-const UpgradeView = (props: Props) => {
+const UpgradeView = () => {
     const trpc = useTRPC();
     const { data: products } = useSuspenseQuery(trpc.premium.getProducts.queryOptions());
 

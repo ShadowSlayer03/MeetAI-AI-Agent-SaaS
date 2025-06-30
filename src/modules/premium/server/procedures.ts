@@ -10,7 +10,7 @@ export const premiumRouter = createTRPCRouter({
             externalId: ctx.auth.user.id
         })
 
-        const subscription = customer.activeSubscriptions[0];
+        const subscription = customer.activeSubscriptions?.[0];
 
         if(!subscription) return null;
 

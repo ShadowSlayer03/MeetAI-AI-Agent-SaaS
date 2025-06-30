@@ -11,7 +11,7 @@ const pricingCardVariants = cva("rounded-lg p-4 py-6 w-full", {
     variants: {
         variant: {
             default: "bg-white text-black",
-            highlighted: "bg-linear-to-br from-[#093C23] to-[#051B16] text-white"
+            highlighted: "bg-gradient-to-br from-[#093C23] to-[#051B16] text-white"
         }
     },
     defaultVariants: {
@@ -94,7 +94,7 @@ const PricingCard = ({
                         {description}
                     </p>
                 </div>
-                <div className="flex items-end shrink-0 gap-x-0 5">
+                <div className="flex items-end shrink-0 gap-x-0.5">
                     <h4 className="text-3xl font-medium">
                         {Intl.NumberFormat("en-US", {
                             style: "currency",
@@ -108,8 +108,12 @@ const PricingCard = ({
             <div className="py-6">
                 <Separator className='opacity-10 text-[#5D6B68]' />
             </div>
-            <Button className="w-full" size="lg" variant={variant === "highlighted" ? "default" : "outline"}>
-                {buttonText}
+            <Button
+                className="w-full"
+                size="lg"
+                variant={variant === "highlighted" ? "default" : "outline"}
+                onClick={onClick}>
+                    {buttonText}
             </Button>
             <div className="flex flex-col gap-y-2 mt-6">
                 <p className="font-medium uppercase">

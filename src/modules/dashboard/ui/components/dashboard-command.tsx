@@ -58,7 +58,7 @@ const DashboardCommand = ({ open, setOpen }: Props) => {
           </CommandEmpty>
           {agents.data?.items.map((agent) => (
             <CommandItem onSelect={() => {
-              router.push(`/meetings/${agent.id}`);
+              router.push(`/agents/${agent.id}`);
               setOpen(false);
             }}
               key={agent.id}
