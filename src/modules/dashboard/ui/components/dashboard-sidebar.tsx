@@ -18,7 +18,9 @@ import React from "react";
 import { firstSection, secondSection } from "../../utils/constants";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+
 import DashboardUserButton from "./dashboard-user-button";
+import DashboardTrial from "./dashboard-trial";
 
 type Props = {};
 
@@ -53,7 +55,7 @@ const DashboardSidebar = (props: Props) => {
                       className={cn(
                         "h-10 hover:bg-linear-to-r/oklch border border-transparent hover:border-[#13d197]/10 from-sidebar-accent from-5% via-30% via-sidebar/50 to-sidebar/50",
                         pathname === item.href &&
-                          "bg-linear-to-r/oklch border-[#13d197]/10"
+                        "bg-linear-to-r/oklch border-[#13d197]/10"
                       )}
                       isActive={pathname === item.href}
                     >
@@ -86,7 +88,7 @@ const DashboardSidebar = (props: Props) => {
                       className={cn(
                         "h-10 hover:bg-linear-to-r/oklch border border-transparent hover:border-[#13d197]/10 from-sidebar-accent from-5% via-30% via-sidebar/50 to-sidebar/50",
                         pathname === item.href &&
-                          "bg-linear-to-r/oklch border-[#13d197]/10"
+                        "bg-linear-to-r/oklch border-[#13d197]/10"
                       )}
                       isActive={pathname === item.href}
                     >
@@ -105,7 +107,8 @@ const DashboardSidebar = (props: Props) => {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="text-white">
-           <DashboardUserButton />   
+        <DashboardTrial />
+        <DashboardUserButton />
       </SidebarFooter>
     </Sidebar>
   );

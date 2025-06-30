@@ -72,7 +72,7 @@ const DashboardUserButton = (props: Props) => {
             <DrawerDescription>{data.user.email}</DrawerDescription>
           </DrawerHeader>
           <DrawerFooter>
-            <Button variant="outline" onClick={()=>router.push("/billing")}>
+            <Button variant="outline" onClick={() => authClient.customer.portal()}>
               <CreditCardIcon className="size-4 text-black" />
               Billing
             </Button>
@@ -121,7 +121,7 @@ const DashboardUserButton = (props: Props) => {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator className="bg-border" />
-        <DropdownMenuItem className="px-4 py-2 cursor-pointer flex items-center justify-between hover:bg-accent" onClick={()=>router.push("/billing")}>
+        <DropdownMenuItem className="px-4 py-2 cursor-pointer flex items-center justify-between hover:bg-accent" onClick={() => authClient.customer.portal()}>
           Billing
           <CreditCardIcon className="size-4" />
         </DropdownMenuItem>

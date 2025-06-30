@@ -58,10 +58,16 @@ const MeetingForm = ({
           trpc.meetings.getMany.queryOptions({})
         );
 
+        await queryClient.invalidateQueries(trpc.premium.getFreeUsage.queryOptions())
+
         onSuccess?.(data.id);
       },
       onError: (error) => {
         toast.error(error.message);
+
+        if (error.data?.code === "FORBIDDEN") {
+          router.push("/upgrade");
+        }
       },
     })
   );
