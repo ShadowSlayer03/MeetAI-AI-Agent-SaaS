@@ -1,6 +1,5 @@
-import EmptyState from "@/components/empty-state";
 import React from "react";
-import { MeetingsGetMany, MeetingsGetManyResponse, MeetingsGetOne } from "../../types";
+import { MeetingsGetMany} from "../../types";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {

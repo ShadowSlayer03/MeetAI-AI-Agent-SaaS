@@ -9,9 +9,7 @@ import AgentsSearchFilter from "./agents-search-filter";
 import { DEFAULT_PAGE } from "@/constants";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
-type Props = {};
-
-const AgentsListHeader = (props: Props) => {
+const AgentsListHeader = () => {
   const [filters, setFilters] = useAgentsFilters();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 

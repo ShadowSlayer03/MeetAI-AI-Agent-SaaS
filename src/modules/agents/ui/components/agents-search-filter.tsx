@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useAgentsFilters } from "../../hooks/use-agents-filters";
 import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";

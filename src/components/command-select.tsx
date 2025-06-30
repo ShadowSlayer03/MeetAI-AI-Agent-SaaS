@@ -36,7 +36,7 @@ const CommandSelect = ({
   const [open, setOpen] = useState(false);
   const selectedOption = options.find((option) => option.value === value);
 
-  const handleOpenChange = (value:boolean)=>{
+  const handleOpenChange = (value: boolean) => {
     onSearch?.("");
     setOpen(value);
   }
@@ -44,7 +44,8 @@ const CommandSelect = ({
   return (
     <>
       <Button
-      onClick={()=>setOpen(true)}
+        disabled={isSearchable}
+        onClick={() => setOpen(true)}
         type="button"
         variant="outline"
         className={cn(

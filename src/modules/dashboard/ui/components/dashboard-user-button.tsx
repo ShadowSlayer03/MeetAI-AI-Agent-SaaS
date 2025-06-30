@@ -24,9 +24,7 @@ import { ChevronDownIcon, CreditCardIcon, LogOutIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-type Props = {};
-
-const DashboardUserButton = (props: Props) => {
+const DashboardUserButton = () => {
   const { data, isPending } = authClient.useSession();
   const isMobile = useIsMobile();
   const router = useRouter();

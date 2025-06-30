@@ -64,7 +64,7 @@ const SignInView = () => {
       );
     } catch (error) {
       setError((error as Error).message);
-      +setPending(false);
+      setPending(false);
     }
   };
 

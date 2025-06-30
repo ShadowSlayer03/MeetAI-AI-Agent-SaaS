@@ -13,9 +13,7 @@ import { useRouter } from "next/navigation";
 import { useMeetingsFilters } from "../../hooks/use-meetings-filters";
 import DataPagination from "@/components/data-pagination";
 
-type Props = {};
-
-const MeetingsView = (props: Props) => {
+const MeetingsView = () => {
   const trpc = useTRPC();
   const router = useRouter();
 

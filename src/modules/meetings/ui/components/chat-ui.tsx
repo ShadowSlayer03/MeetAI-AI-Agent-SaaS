@@ -50,27 +50,36 @@ const ChatUI = ({
 
     setChannel(channel);
 
-    return () => {
-      channel.unwatch();
-    };
   }, [client, meetingId, userId])
   if (!client) {
     return <LoadingState title="Loading Chat" description="This may take a few seconds" />
   }
 
-  return <div className="bg-white rounded-lg border overflow-hidden">
+  return (
+  <div className="bg-white rounded-lg border overflow-hidden">
     <Chat client={client}>
       <Channel channel={channel}>
         <Window>
+          <div className="p-4 border-b bg-gray-50 flex items-center justify-between">
+            <h2 className="text-lg font-semibold text-gray-800 truncate">{meetingName}</h2>
+          </div>
+
+          {/* Message List */}
           <div className="flex-1 overflow-y-auto max-h-[calc(100vh-23rem)] border-b">
             <MessageList />
           </div>
+
+          {/* Message Input */}
           <MessageInput />
         </Window>
+
+        {/* Thread view */}
         <Thread />
       </Channel>
     </Chat>
-  </div>;
+  </div>
+);
+
 };
 
 export default ChatUI;

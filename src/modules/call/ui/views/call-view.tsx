@@ -1,7 +1,6 @@
 "use client";
 
 import ErrorState from "@/components/error-state";
-import { MeetingsGetOne } from "@/modules/meetings/types";
 import { useTRPC } from "@/trpc/client";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import React from "react";
@@ -16,7 +15,7 @@ const CallView = ({ meetingId }: Props) => {
 
   const { data } = useSuspenseQuery(
     trpc.meetings.getOne.queryOptions({ id: meetingId })
-  ) as MeetingsGetOne;
+  );
 
   if (data.status === "completed") {
     return (

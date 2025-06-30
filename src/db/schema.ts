@@ -1,11 +1,8 @@
 import {
   pgTable,
-  varchar,
-  serial,
   text,
   timestamp,
   boolean,
-  integer,
   pgEnum,
 } from "drizzle-orm/pg-core";
 import { nanoid } from "nanoid";

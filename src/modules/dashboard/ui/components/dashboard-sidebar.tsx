@@ -22,9 +22,7 @@ import { usePathname } from "next/navigation";
 import DashboardUserButton from "./dashboard-user-button";
 import DashboardTrial from "./dashboard-trial";
 
-type Props = {};
-
-const DashboardSidebar = (props: Props) => {
+const DashboardSidebar = () => {
   const pathname = usePathname();
 
   return (

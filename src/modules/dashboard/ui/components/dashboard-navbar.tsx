@@ -1,14 +1,12 @@
 "use client";
 
-import React, { KeyboardEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../../../../components/ui/button";
 import { PanelLeftCloseIcon, PanelLeftIcon, SearchIcon } from "lucide-react";
 import { useSidebar } from "../../../../components/ui/sidebar";
 import DashboardCommand from "@/modules/dashboard/ui/components/dashboard-command";
 
-type Props = {};
-
-const DashboardNavbar = (props: Props) => {
+const DashboardNavbar = () => {
   const { state, toggleSidebar, isMobile } = useSidebar();
   const [commandOpen, setCommandOpen] = useState(false);
 

@@ -11,9 +11,7 @@ import AgentIdFilter from "./agent-id-filter";
 import { useMeetingsFilters } from "../../hooks/use-meetings-filters";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
-type Props = {};
-
-const MeetingsListHeader = (props: Props) => {
+const MeetingsListHeader = () => {
   const [filters, setFilters] = useMeetingsFilters();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 

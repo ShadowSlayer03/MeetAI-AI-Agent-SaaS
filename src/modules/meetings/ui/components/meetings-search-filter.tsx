@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";
 import { useMeetingsFilters } from "@/modules/meetings/hooks/use-meetings-filters";

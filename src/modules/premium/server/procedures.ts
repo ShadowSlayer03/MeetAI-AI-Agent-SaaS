@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { db } from "@/db";
 import { agents, meetings } from "@/db/schema";
 import { polarClient } from "@/lib/polar";
@@ -31,16 +33,14 @@ export const premiumRouter = createTRPCRouter({
     }),
     getFreeUsage: protectedProcedure.query(async ({ ctx }) => {
         try {
-            let customer;
-
             try {
-                customer = await polarClient.customers.getStateExternal({
+                await polarClient.customers.getStateExternal({
                     externalId: ctx.auth.user.id
                 });
             } catch (err: any) {
                 if (err?.error === "ResourceNotFound") {
                     // Automatically create a Polar customer for free tier users
-                    customer = await polarClient.customers.create({
+                    await polarClient.customers.create({
                         externalId: ctx.auth.user.id,
                         name: ctx.auth.user.name ?? "User",
                         email: ctx.auth.user.email ?? undefined,

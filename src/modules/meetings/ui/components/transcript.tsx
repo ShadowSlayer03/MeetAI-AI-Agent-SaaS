@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useTRPC } from "@/trpc/client";
@@ -18,7 +20,7 @@ const Transcript = ({ meetingId }: Props) => {
   const trpc = useTRPC();
   const { data } = useQuery(
     trpc.meetings.getTranscript.queryOptions({ id: meetingId })
-  ) as TranscriptEntry;
+  );
 
   const [searchQuery, setSearchQuery] = useState("");
   const filteredData = (data ?? []).filter((item: TranscriptEntry) =>
